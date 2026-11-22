@@ -1,84 +1,163 @@
-# MP Manager (MPM) Official Web Platform & Billing Gateway
+# MP Manager v1.5
 
-The official multi-page web portal, product showcase, documentation, download center, and automated Paddle checkout gateway for **MP Manager (MPM)**. Deployed globally on Cloudflare Workers edge network.
+### Release Notes \& Application Overview
 
----
+**Version:** 1.5  
+**Release:** November 2026  
+**Application:** MP Manager (MPM)
 
-## 🌐 Live Web Routes
+\---
 
-| Route | Description |
-| :--- | :--- |
-| **`/`** or **`/home`** | Modern homepage featuring security stats, core capabilities, architecture overview, and download CTAs. |
-| **`/features`** | Deep technical breakdown of AES-256-GCM encryption, 150,000-round PBKDF2-HMAC derivation, Emergency Guardian Matrix, and P2P Chat Relay. |
-| **`/pricing`** | Full pricing tiers (Free $0, Pro $2/mo, Ultra $4/mo, Family $7/mo) with web-checkout modal and in-app upgrade details. |
-| **`/download`** | Download hub for Windows 10 & 11 (64-bit AMD64), SHA-256 checksum verification command, system requirements, and Android APK roadmap. |
-| **`/download/exe`** | Direct download redirect for `MP-Manager-Setup-1.4-amd64.exe`. |
-| **`/faq`** | Interactive accordion FAQ covering cryptography, lost master password policies, multi-device sync, and Paddle subscriptions. |
-| **`/support`** | Customer support contacts, documentation quick links, and app self-diagnostic telemetry instructions. |
-| **`/privacy`** | Legal privacy policy tailored to zero-knowledge vault protection and Paddle Merchant of Record processing. |
-| **`/terms`** | Terms of service and subscription renewal policies. |
-| **`/checkout`** | Automated Paddle billing endpoint used by both the desktop application and web portal (`?email=...&plan=...`). |
-| **`?_ptxn=...`** | Seamless Paddle checkout overlay and return handler. |
+## 1\. Introduction
 
----
+**MP Manager (MPM)** is a secure password and credential management application designed to help users store, organize, manage, and protect their sensitive account information in one centralized environment.
 
-## ⚡ Paddle Payment Gateway & Streamlined Overlay
+MPM provides a convenient way to manage passwords, login credentials, and other important information while prioritizing data security, privacy, and user control.
 
-1. **Automated Transaction Creation:**
-   - Both the MP Manager desktop application and the web pricing modal forward users to:
-     ```
-     https://mpm.ahmadqazii1188.workers.dev/checkout?email=user@example.com&plan=pro
-     ```
-   - The worker dynamically generates a Paddle transaction via the Paddle API (`/transactions`) with custom metadata (`app: mp_manager`, `user_email`, `plan_key`).
+With its local data management approach, MPM gives users greater control over their stored information. The application combines security-focused functionality with practical tools, an intuitive interface, and features designed to simplify everyday credential management.
 
-2. **Streamlined Checkout Overlay:**
-   - When Paddle returns `_ptxn` in the URL, the page immediately initializes Paddle.js and opens the checkout modal overlay.
-   - The fallback placeholder box ("Click Here if Checkout Doesn't Open") has been removed in favor of a sleek, dark background with an unobtrusive loading pulse that transitions instantly into the Paddle checkout.
+### Introducing Version 1.5
 
-3. **Success Page:**
-   - Once payment is verified, customers are shown a verified confirmation screen advising them to return to the MP Manager desktop app and click **"🔄 Check Subscription Status"**.
+MP Manager v1.5 represents a significant improvement over previous versions. This release introduces a wide range of enhancements across security, performance, usability, data management, and system reliability.
 
----
+Alongside new functionality, considerable attention has been given to resolving existing issues, improving customer-requested features, and refining the overall application experience.
 
-## 🚀 Deployment & Configuration
+\---
 
-### Prerequisites
-- Node.js (v18+)
-- Cloudflare Wrangler CLI:
-  ```bash
-  npm install -g wrangler
-  ```
+## 2\. What's New in Version 1.5?
 
-### Local Testing
-```bash
-npx wrangler dev
-```
+Version 1.5 introduces the following improvements and enhancements:
 
-### Deploying to Cloudflare Workers
-```bash
-npx wrangler deploy
-```
+### 2.1 Entry Lock \& Security
 
-### Environment Secrets in Cloudflare
-Set the Paddle API Key securely in Cloudflare:
-```bash
-npx wrangler secret put PADDLE_API_KEY
-```
-*(Optional) You can also set custom Price IDs via secrets:*
-```bash
-npx wrangler secret put PRICE_PRO
-npx wrangler secret put PRICE_ULTRA
-npx wrangler secret put PRICE_FAMILY
-```
+Enhanced security controls for individual entries, providing additional protection for sensitive credentials and reducing the risk of unintended access or modification.
 
----
+### 2.2 Bug Fixes \& Stability
 
-## 📁 Repository Structure
+Resolved reported issues and improved application stability. Various corrections have been implemented to provide a more consistent and reliable experience.
 
-```
-10 - MPM Web Official/
-├── index.js          # Core Cloudflare Worker script: multi-page router, HTML page renderers, and Paddle API gateway
-├── index.html        # Standalone, static HTML release of the website for offline or static hosting
-├── wrangler.toml     # Cloudflare Worker configuration & environment definitions
-└── README.md         # Repository documentation
-```
+### 2.3 User Interface Enhancements
+
+Improved the application's visual presentation, interface consistency, and overall usability. Interface refinements make navigation and everyday operations more convenient.
+
+### 2.4 Keyboard Shortcuts
+
+Introduced additional keyboard shortcuts to make frequently performed actions faster and more accessible, reducing dependence on mouse navigation.
+
+### 2.5 Enhanced Health Report
+
+Improved the application health reporting system to provide better visibility into the condition and security of stored credentials.
+
+### 2.6 Performance Optimizations
+
+Optimized internal application operations to improve responsiveness, reduce unnecessary processing, and provide smoother interactions.
+
+### 2.7 Customer Feedback Improvements
+
+Implemented improvements based on customer feedback and reported usability concerns, making the application more aligned with user expectations.
+
+### 2.8 Improved Local Data Management
+
+Enhanced the handling and organization of locally stored application data, improving data management operations and reliability.
+
+### 2.9 Context Menu Enhancements
+
+Improved context menus with additional functionality and usability refinements, making commonly used actions easier to access.
+
+### 2.10 Multi-Entry Selection
+
+Introduced the ability to select multiple entries, making it easier to perform operations on several credentials without handling each entry individually.
+
+### 2.11 QR Code Backup \& Recovery
+
+Introduced QR code-based backup and recovery functionality, providing an additional method for handling and restoring supported backup data.
+
+### 2.12 CSV Export as Browser Requirements
+
+Improved CSV export functionality to better accommodate browser-specific requirements, helping ensure compatibility when exporting credential data.
+
+### 2.13 Self Diagnostic System
+
+Introduced a self-diagnostic mechanism to help identify potential application issues and provide better insight into the application's operational condition.
+
+### 2.14 Live Synchronization
+
+Introduced live synchronization functionality to improve the consistency and availability of supported application data across connected environments.
+
+### 2.15 Editing Log
+
+Introduced an editing log to provide visibility into changes made to stored entries, helping users keep track of modifications.
+
+### 2.16 Data Sharing
+
+Introduced data-sharing functionality to make it easier to share supported information when required, while maintaining consideration for data security.
+
+### 2.17 Emergency Access
+
+Introduced an emergency access feature to provide an additional way to access supported information in emergency situations.
+
+### 2.18 Two-Factor Authentication Fix
+
+Resolved issues affecting Two-Factor Authentication (2FA), improving the reliability of the verification process and account security.
+
+\---
+
+## 3\. Key Improvements at a Glance
+
+|Area|Improvements|
+|-|-|
+|Security|Entry Lock, 2FA fixes, Emergency Access|
+|Performance|Performance optimizations, stability improvements|
+|User Experience|Interface enhancements, keyboard shortcuts, context menus|
+|Data Management|Local data improvements, multi-entry selection|
+|Backup \& Export|QR Code Backup \& Recovery, CSV export|
+|Monitoring|Enhanced Health Report, Self Diagnostic System|
+|Activity Tracking|Editing Log|
+|Connectivity|Live Synchronization|
+|Collaboration|Data Sharing|
+|Customer Experience|Feedback-driven improvements|
+
+\---
+
+## 4\. Security \& Privacy
+
+Security remains an important consideration in MP Manager's development.
+
+Version 1.5 expands the application's security-related functionality through entry protection, improved authentication reliability, emergency access, and additional data management capabilities.
+
+Users should continue to handle exported backups and shared information carefully, particularly when dealing with unencrypted credential data.
+
+\---
+
+## 5\. Upgrade Information
+
+Existing MP Manager users are encouraged to upgrade to version 1.5 to benefit from the latest improvements and functionality.
+
+**Before upgrading:**
+
+* Create a backup of your existing data.
+* Keep your backup in a secure location.
+* Verify that your important credentials are accessible after upgrading.
+
+Always ensure that you have a valid backup before performing major application updates.
+
+\---
+
+## 6\. What's Next?
+
+MP Manager will continue to evolve through ongoing improvements, security enhancements, performance optimizations, and features inspired by customer feedback.
+
+The goal is to make MPM a dependable and convenient solution for managing sensitive digital credentials.
+
+\---
+
+## Thank You
+
+Thank you for choosing **MP Manager**.
+
+Your feedback, suggestions, and continued support play an important role in improving the application.
+
+**MP Manager — Your Credentials, Under Your Control.**
+
+© 2026 MP Manager. All rights reserved.
+
